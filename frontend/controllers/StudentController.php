@@ -10,9 +10,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PersonController implements the CRUD actions for Person model.
+ * StudentController implements the CRUD actions for Person model.
  */
-class PersonController extends Controller
+class StudentController extends Controller
 {
     public function behaviors()
     {
@@ -33,7 +33,9 @@ class PersonController extends Controller
     public function actionIndex()
     {
         $searchModel = new PersonSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $queryParams = array_merge(array(), Yii::$app->request->queryParams);
+        $queryParams['PersonSearch']['is_student'] = true;
+        $dataProvider = $searchModel->search($queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,

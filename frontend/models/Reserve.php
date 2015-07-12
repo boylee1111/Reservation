@@ -11,8 +11,8 @@ use Yii;
  * @property integer $reserve_student_id
  * @property integer $reserve_coach_id
  * @property integer $reserve_spot_id
+ * @property string $reserve_date
  * @property string $reserve_start_time
- * @property string $reserve_end_time
  *
  * @property Person $reserveCoach
  * @property Person $reserveStudent
@@ -34,9 +34,9 @@ class Reserve extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['reserve_student_id', 'reserve_coach_id', 'reserve_spot_id', 'reserve_start_time', 'reserve_end_time'], 'required'],
+            [['reserve_student_id', 'reserve_coach_id', 'reserve_spot_id', 'reserve_date', 'reserve_start_time'], 'required'],
             [['reserve_student_id', 'reserve_coach_id', 'reserve_spot_id'], 'integer'],
-            [['reserve_start_time', 'reserve_end_time'], 'safe']
+            [['reserve_date', 'reserve_start_time'], 'safe']
         ];
     }
 
@@ -50,8 +50,8 @@ class Reserve extends \yii\db\ActiveRecord
             'reserve_student_id' => 'Reserve Student ID',
             'reserve_coach_id' => 'Reserve Coach ID',
             'reserve_spot_id' => 'Reserve Spot ID',
+            'reserve_date' => 'Reserve Date',
             'reserve_start_time' => 'Reserve Start Time',
-            'reserve_end_time' => 'Reserve End Time',
         ];
     }
 

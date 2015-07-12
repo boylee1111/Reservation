@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Person */
 
-$this->title = $model->person_id;
-$this->params['breadcrumbs'][] = ['label' => 'People', 'url' => ['index']];
+$this->title = $model->person_name;
+$this->params['breadcrumbs'][] = ['label' => 'Students', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="person-view">
@@ -28,12 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'person_id',
+            // 'person_id',
             'person_wechat_id',
             'person_name',
             'phone_number',
-            'is_student:boolean',
-            'is_coach:boolean',
+            // 'is_student:boolean',
+            // 'is_coach:boolean',
             'person_rate',
             'recommend_by',
         ],

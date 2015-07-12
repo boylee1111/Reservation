@@ -28,12 +28,28 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'reserve_id',
-            'reserve_student_id',
-            'reserve_coach_id',
-            'reserve_spot_id',
-            'reserve_start_time',
-            'reserve_end_time',
+            [
+                'attribute' => 'reserveStudent.person_name',
+                'label' => 'Student',
+            ],
+            [
+                'attribute' => 'reserveCoach.person_name',
+                'label' => 'Coach',
+            ],
+            [
+                'attribute' => 'reserveSpot.spot_name',
+                'label' => 'Spot',
+            ],
+            [
+                'attribute' => 'reserve_date',
+                'format' => ['date', 'php:Y-m-d'],
+                'label' => 'Date',
+            ],
+            [
+                'attribute' => 'reserve_start_time',
+                'format' => ['date', 'php:HH-mm'],
+                'label' => 'Start Time',
+            ],
         ],
     ]) ?>
 

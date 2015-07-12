@@ -19,7 +19,7 @@ class ReserveSearch extends Reserve
     {
         return [
             [['reserve_id', 'reserve_student_id', 'reserve_coach_id', 'reserve_spot_id'], 'integer'],
-            [['reserve_start_time', 'reserve_end_time'], 'safe'],
+            [['reserve_date', 'reserve_start_time', 'reserveStudent.person_name', 'reserveCoach.person_name', 'reserveSpot.spot_name'], 'safe'],
         ];
     }
 
@@ -30,6 +30,11 @@ class ReserveSearch extends Reserve
     {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
+    }
+
+    public function attributes()
+    {
+        return array_merge(parent::attributes(), ['reserveStudent.person_name', 'reserveCoach.person_name', 'reserveSpot.spot_name']);
     }
 
     /**
@@ -47,6 +52,23 @@ class ReserveSearch extends Reserve
             'query' => $query,
         ]);
 
+        $dataProvider->sort->attributes['reserveStudent.person_name'] = [
+            'asc' => ['person.person_name' => SORT_ASC],
+            'desc' => ['person.person_name' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['reserveCoach.person_name'] = [
+            'asc' => ['person.person_name' => SORT_ASC],
+            'desc' => ['person.person_name' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['reserveSpot.spot_name'] = [
+            'asc' => ['spot.spot_name' => SORT_ASC],
+            'desc' => ['spot.spot_name' => SORT_DESC],
+        ];
+
+        $query->joinWith(['reserveStudent', 'reserveSpot']);
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -60,9 +82,13 @@ class ReserveSearch extends Reserve
             'reserve_student_id' => $this->reserve_student_id,
             'reserve_coach_id' => $this->reserve_coach_id,
             'reserve_spot_id' => $this->reserve_spot_id,
+            'reserve_date' => $this->reserve_date,
             'reserve_start_time' => $this->reserve_start_time,
-            'reserve_end_time' => $this->reserve_end_time,
         ]);
+
+        $query->andFilterWhere(['like', 'person.person_name', $this->getAttribute('reserveStudent.person_name')])
+            ->andFilterWhere(['like', 'person.person_name', $this->getAttribute('reserveCoach.person_name')])
+            ->andFilterWhere(['like', 'spot.spot_name', $this->getAttribute('spot.spot_name')]);
 
         return $dataProvider;
     }

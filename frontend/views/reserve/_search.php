@@ -23,9 +23,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'reserve_spot_id') ?>
 
-    <?= $form->field($model, 'reserve_start_time') ?>
+    <?= $form->field($model, 'reserve_date') ?>
 
-    <?php // echo $form->field($model, 'reserve_end_time') ?>
+    <?php // echo $form->field($model, 'reserve_start_time') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

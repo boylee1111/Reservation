@@ -44,7 +44,8 @@ class Person extends \yii\db\ActiveRecord
             [['person_wechat_id'], 'string', 'max' => 225],
             [['person_name', 'phone_number'], 'string', 'max' => 255],
             [['person_wechat_id'], 'unique'],
-            [['phone_number'], 'unique']
+            [['phone_number'], 'unique'],
+            ['person_rate', 'default', 'value' => 2],
         ];
     }
 
