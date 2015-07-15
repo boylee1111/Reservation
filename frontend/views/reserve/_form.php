@@ -37,7 +37,7 @@ use kartik\date\DatePicker;
         'pluginOptions' => [
             'allowClear' => true,
         ]
-    ])->label('Reserve Student')?>
+    ])->label('Reserve Coach')?>
 
     <?= $form->field($model, 'reserve_spot_id')->widget(Select2::className(), [
         'data' => ArrayHelper::map(Spot::find()->all(), 'spot_id', 'spot_name'),
